@@ -29,13 +29,14 @@ try:
         
         descricao = requisicao_dic['weather'][0]['description']
         temperatura = requisicao_dic['main']['temp'] - 273.15
-        
+        formatted_number = "{:.2f}".format(temperatura)
         data = client_socket.recv(1024)  
         if not data:
             break
         print(f"Mensagem recebida: {data.decode()}")
+        
 
-        response = f"{descricao} | {temperatura} Graus"        
+        response = f"{descricao} | { formatted_number} Graus"        
         client_socket.send(response.encode())
 
 except Exception as e:
